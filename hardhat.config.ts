@@ -41,16 +41,17 @@ const config: HardhatUserConfig = {
       autoImpersonate: true,
     },
     base_sepolia: {
-      url: ALCHEMY_BASE_URL[CHAIN_ID.BASE_SEPOLIA] + process.env.ALCHEMY_API_KEY,
+      url:
+        ALCHEMY_BASE_URL[CHAIN_ID.BASE_SEPOLIA] + process.env.ALCHEMY_API_KEY,
       chainId: parseInt(CHAIN_ID.BASE_SEPOLIA),
       deploy: ["./deploy/base_sepolia/"],
       verify: {
         etherscan: {
-          apiUrl: "https://api.etherscan.io",
+          apiUrl: "https://api-sepolia.basescan.org/",
           apiKey: process.env.ETHERSCAN_API ?? "NO_KEY",
         },
       },
-    },    
+    },
   },
   paths: {
     sources: "./contracts",
@@ -163,8 +164,17 @@ const config: HardhatUserConfig = {
   etherscan: {
     apiKey: {
       base_testnet: process.env.ETHERSCAN_API ?? "NO_KEY",
+      base_sepolia: process.env.ETHERSCAN_API ?? "NO_KEY",
     },
     customChains: [
+      {
+        network: "base_sepolia",
+        chainId: 84532,
+        urls: {
+          apiURL: "https://api-sepolia.basescan.io/",
+          browserURL: "https://sepolia.basescan.org/",
+        },
+      },
       {
         network: "base_testnet",
         chainId: 84531,

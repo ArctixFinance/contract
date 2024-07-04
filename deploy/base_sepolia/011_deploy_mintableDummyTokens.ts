@@ -15,10 +15,10 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
   })
 
   // save token deployment
-  await save("Dummy1", {
-    abi: dummyToken1.abi,
-    address: dummyToken1.address,
-  })
+  // await save("Dummy1", {
+  //   abi: dummyToken1.abi,
+  //   address: dummyToken1.address,
+  // })
 
   const dummyToken2 = await deploy("Dummy2", {
     contract: "DummyERC20",
@@ -28,10 +28,10 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
     args: ["FreeMintableDummyERC20_2", "Dummy2"],
   })
   // save token deployment
-  await save("Dummy2", {
-    abi: dummyToken2.abi,
-    address: dummyToken2.address,
-  })
+  // await save("Dummy2", {
+  //   abi: dummyToken2.abi,
+  //   address: dummyToken2.address,
+  // })
 }
 export default func
 func.tags = ["MintableDummyTokens"]
