@@ -7,6 +7,7 @@ export const CHAIN_ID: Record<string, string> = {
   MAINNET: "1",
   ROPSTEN: "3",
   KOVAN: "42",
+  BASE_SEPOLIA: "84532",
   HARDHAT: "31337",
   ARBITRUM_MAINNET: "42161",
   ARBITRUM_TESTNET: "421611",
@@ -54,7 +55,8 @@ export function isTestNetwork(networkId: string): boolean {
     networkId === CHAIN_ID.FANTOM_TESTNET ||
     networkId === CHAIN_ID.EVMOS_TESTNET ||
     networkId === CHAIN_ID.KAVA_TESTNET ||
-    networkId == CHAIN_ID.BASE_TESTNET
+    networkId == CHAIN_ID.BASE_TESTNET ||
+    networkId == CHAIN_ID.BASE_SEPOLIA
   )
 }
 
@@ -68,4 +70,5 @@ export const ALCHEMY_BASE_URL = {
   [CHAIN_ID.OPTIMISM_MAINNET]: "https://opt-mainnet.g.alchemy.com/v2/",
   [CHAIN_ID.ARBITRUM_MAINNET]: "https://arb-mainnet.g.alchemy.com/v2/",
   [CHAIN_ID.ARBITRUM_TESTNET]: "https://arb-rinkeby.g.alchemy.com/v2/",
+  [CHAIN_ID.BASE_SEPOLIA]: "https://base-sepolia.g.alchemy.com/v2/",
 }

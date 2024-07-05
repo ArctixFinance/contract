@@ -1,5 +1,5 @@
 import "@nomicfoundation/hardhat-toolbox"
-import "@nomiclabs/hardhat-vyper"
+// import "@nomiclabs/hardhat-vyper"
 import "hardhat-deploy"
 import "hardhat-spdx-license-identifier"
 import "hardhat-tracer"
@@ -40,150 +40,14 @@ const config: HardhatUserConfig = {
       deploy: ["./deploy/hardhat/"],
       autoImpersonate: true,
     },
-    mainnet: {
-      url: ALCHEMY_BASE_URL[CHAIN_ID.MAINNET] + process.env.ALCHEMY_API_KEY,
-      chainId: parseInt(CHAIN_ID.MAINNET),
-      deploy: ["./deploy/mainnet/"],
-      verify: {
-        etherscan: {
-          apiUrl: "https://api.etherscan.io",
-          apiKey: process.env.ETHERSCAN_API ?? "NO_KEY",
-        },
-      },
-    },
-    ropsten: {
-      url: ALCHEMY_BASE_URL[CHAIN_ID.ROPSTEN] + process.env.ALCHEMY_API_KEY,
-      chainId: parseInt(CHAIN_ID.ROPSTEN),
-      accounts: {
-        mnemonic: process.env.MNEMONIC_TEST_ACCOUNT,
-      },
-      deploy: ["./deploy/ropsten/"],
-    },
-    arbitrum_testnet: {
+    base_sepolia: {
       url:
-        ALCHEMY_BASE_URL[CHAIN_ID.ARBITRUM_TESTNET] +
-        process.env.ALCHEMY_API_KEY,
-      chainId: parseInt(CHAIN_ID.ARBITRUM_TESTNET),
-      accounts: {
-        mnemonic: process.env.MNEMONIC_TEST_ACCOUNT,
-      },
-      deploy: ["./deploy/arbitrum/"],
-    },
-    arbitrum_mainnet: {
-      url: "https://arb1.arbitrum.io/rpc",
-      chainId: parseInt(CHAIN_ID.ARBITRUM_MAINNET),
-      deploy: ["./deploy/arbitrum/"],
+        ALCHEMY_BASE_URL[CHAIN_ID.BASE_SEPOLIA] + process.env.ALCHEMY_API_KEY,
+      chainId: parseInt(CHAIN_ID.BASE_SEPOLIA),
+      deploy: ["./deploy/base_sepolia/"],
       verify: {
         etherscan: {
-          apiUrl: "https://api.arbiscan.io",
-          apiKey: process.env.ETHERSCAN_ARB_API ?? "NO_KEY",
-        },
-      },
-    },
-    optimism_testnet: {
-      url: "https://kovan.optimism.io",
-      chainId: parseInt(CHAIN_ID.OPTIMISM_TESTNET),
-      accounts: {
-        mnemonic: process.env.MNEMONIC_TEST_ACCOUNT,
-      },
-      deploy: ["./deploy/optimism/"],
-    },
-    optimism_mainnet: {
-      url:
-        ALCHEMY_BASE_URL[CHAIN_ID.OPTIMISM_MAINNET] +
-        process.env.ALCHEMY_API_KEY,
-      chainId: parseInt(CHAIN_ID.OPTIMISM_MAINNET),
-      deploy: ["./deploy/optimism/"],
-      verify: {
-        etherscan: {
-          apiUrl: "https://api-optimistic.etherscan.io",
-          apiKey: process.env.ETHERSCAN_OPT_API ?? "NO_KEY",
-        },
-      },
-    },
-    fantom_testnet: {
-      url: "https://rpc.testnet.fantom.network/",
-      chainId: parseInt(CHAIN_ID.FANTOM_TESTNET),
-      accounts: {
-        mnemonic: process.env.MNEMONIC_TEST_ACCOUNT,
-      },
-      deploy: ["./deploy/fantom/"],
-    },
-    fantom_mainnet: {
-      url: "https://rpc.ftm.tools/",
-      chainId: parseInt(CHAIN_ID.FANTOM_MAINNET),
-      deploy: ["./deploy/fantom/"],
-      verify: {
-        etherscan: {
-          apiUrl: "https://api.ftmscan.com",
-          apiKey: process.env.ETHERSCAN_FTM_API ?? "NO_KEY",
-        },
-      },
-    },
-    evmos_testnet: {
-      url: "https://eth.bd.evmos.dev:8545",
-      chainId: parseInt(CHAIN_ID.EVMOS_TESTNET),
-      deploy: ["./deploy/evmos_testnet/"],
-      accounts: {
-        mnemonic: process.env.MNEMONIC_TEST_ACCOUNT,
-      },
-    },
-    evmos_mainnet: {
-      live: true,
-      url: "https://eth.bd.evmos.org:8545",
-      chainId: parseInt(CHAIN_ID.EVMOS_MAINNET),
-      deploy: ["./deploy/evmos/"],
-      verify: {
-        etherscan: {
-          apiUrl: "https://evm.evmos.org",
-          apiKey: "NO_KEY",
-        },
-      },
-    },
-    kava_testnet: {
-      url: "https://evm.evm-alpha.kava.io",
-      chainId: parseInt(CHAIN_ID.KAVA_TESTNET),
-      deploy: ["./deploy/kava_testnet/"],
-      verify: {
-        etherscan: {
-          apiUrl: "https://explorer.evm-alpha.kava.io",
-        },
-      },
-      accounts: {
-        mnemonic: process.env.MNEMONIC_TEST_ACCOUNT,
-      },
-    },
-    kava_mainnet: {
-      live: true,
-      url: "https://evm2.kava.io",
-      chainId: parseInt(CHAIN_ID.KAVA_MAINNET),
-      deploy: ["./deploy/kava_mainnet/"],
-      verify: {
-        etherscan: {
-          apiUrl: "https://explorer.kava.io",
-          apiKey: "NO_KEY",
-        },
-      },
-    },
-    aurora_mainnet: {
-      live: true,
-      url: "https://mainnet.aurora.dev",
-      chainId: parseInt(CHAIN_ID.AURORA_MAINNET),
-      deploy: ["./deploy/aurora_mainnet/"],
-      verify: {
-        etherscan: {
-          apiUrl: "https://api.aurorascan.dev",
-          apiKey: process.env.ETHERSCAN_AURORA_API ?? "NO_KEY",
-        },
-      },
-    },
-    base_testnet: {
-      url: "https://goerli.base.org",
-      chainId: parseInt(CHAIN_ID.BASE_TESTNET),
-      deploy: ["./deploy/base_testnet/"],
-      verify: {
-        etherscan: {
-          apiUrl: "https://api-goerli.basescan.org",
+          apiUrl: "https://api-sepolia.basescan.org/",
           apiKey: process.env.ETHERSCAN_API ?? "NO_KEY",
         },
       },
@@ -269,7 +133,7 @@ const config: HardhatUserConfig = {
       default: crossChainDeployerAccount,
     },
     libraryDeployer: {
-      default: 1, // use a different account for deploying libraries on the hardhat network
+      default: 0, // use a different account for deploying libraries on the hardhat network
       1: 0, // use the same address as the main deployer on mainnet
       42161: 0, // use the same address on arbitrum mainnet
       10: 0, // use the same address on optimism mainnet
@@ -281,6 +145,7 @@ const config: HardhatUserConfig = {
       3: 0, // use the same address on ropsten
       1313161554: 0, // use the same address on aurora mainnet
       84531: 0, // use the same address on base testnet
+      84532: 0,
     },
     multisig: {
       default: 0,
@@ -300,8 +165,17 @@ const config: HardhatUserConfig = {
   etherscan: {
     apiKey: {
       base_testnet: process.env.ETHERSCAN_API ?? "NO_KEY",
+      base_sepolia: process.env.ETHERSCAN_API ?? "NO_KEY",
     },
     customChains: [
+      {
+        network: "base_sepolia",
+        chainId: 84532,
+        urls: {
+          apiURL: "https://api-sepolia.basescan.io/",
+          browserURL: "https://sepolia.basescan.org/",
+        },
+      },
       {
         network: "base_testnet",
         chainId: 84531,
