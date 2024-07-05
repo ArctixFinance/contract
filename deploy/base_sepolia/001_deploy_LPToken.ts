@@ -1,29 +1,30 @@
-import { DeployFunction } from "hardhat-deploy/types"
 import { HardhatRuntimeEnvironment } from "hardhat/types"
+import { DeployFunction } from "hardhat-deploy/types"
 
 const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
-  const { deployments, getNamedAccounts } = hre
+  const { deployments, getNamedAccounts, getChainId } = hre
   const { deploy, execute, getOrNull, log } = deployments
   const { deployer } = await getNamedAccounts()
 
-  const lpToken = await getOrNull("LPTokenV2")
+  const lpToken = await getOrNull("LPToken")
   if (lpToken) {
-    log(`reusing "LPTokenV2" at ${lpToken.address}`)
+    log(`reusing "LPToken" at ${lpToken.address}`)
   } else {
-    await deploy("LPTokenV2", {
+    await deploy("LPToken", {
       from: deployer,
       log: true,
       skipIfAlreadyDeployed: true,
+      waitConfirmations: 3,
     })
 
     await execute(
-      "LPTokenV2",
+      "LPToken",
       { from: deployer, log: true },
       "initialize",
-      "Arctix LP Token (Target)",
-      "arctixLPTokenTarget",
+      "Saddle LP Token (Target)",
+      "saddleLPTokenTarget",
     )
   }
 }
 export default func
-func.tags = ["LPTokenV2"]
+func.tags = ["LPToken"]

@@ -133,7 +133,7 @@ const config: HardhatUserConfig = {
       default: crossChainDeployerAccount,
     },
     libraryDeployer: {
-      default: 1, // use a different account for deploying libraries on the hardhat network
+      default: 0, // use a different account for deploying libraries on the hardhat network
       1: 0, // use the same address as the main deployer on mainnet
       42161: 0, // use the same address on arbitrum mainnet
       10: 0, // use the same address on optimism mainnet
@@ -145,6 +145,7 @@ const config: HardhatUserConfig = {
       3: 0, // use the same address on ropsten
       1313161554: 0, // use the same address on aurora mainnet
       84531: 0, // use the same address on base testnet
+      84532: 0,
     },
     multisig: {
       default: 0,

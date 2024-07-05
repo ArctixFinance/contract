@@ -55,7 +55,8 @@ export function isTestNetwork(networkId: string): boolean {
     networkId === CHAIN_ID.FANTOM_TESTNET ||
     networkId === CHAIN_ID.EVMOS_TESTNET ||
     networkId === CHAIN_ID.KAVA_TESTNET ||
-    networkId == CHAIN_ID.BASE_TESTNET
+    networkId == CHAIN_ID.BASE_TESTNET ||
+    networkId == CHAIN_ID.BASE_SEPOLIA
   )
 }
 
